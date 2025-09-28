@@ -87,6 +87,7 @@
           }]
         },
         { "name": "Listar Productoras (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/productoras" } },
+        { "name": "Obtener Productora por ID (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/productoras/{{ID_PRODUCTORA}}" } },
         { "name": "Actualizar Productora (PUT)", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"descripcion\": \"Productora con más de 100 años\"\n}" }, "url": "http://localhost:5000/api/productoras/{{ID_PRODUCTORA}}" } },
         { "name": "Eliminar/Desactivar Productora (DELETE)", "request": { "method": "DELETE", "url": "http://localhost:5000/api/productoras/{{ID_PRODUCTORA}}" } }
       ]
@@ -108,6 +109,7 @@
           }]
         },
         { "name": "Listar Tipos (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/tipos" } },
+        { "name": "Obtener Tipo por ID (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/tipos/{{ID_TIPO}}" } },
         { "name": "Actualizar Tipo (PUT)", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"descripcion\": \"Película de larga duración\"\n}" }, "url": "http://localhost:5000/api/tipos/{{ID_TIPO}}" } },
         { "name": "Eliminar Tipo (DELETE)", "request": { "method": "DELETE", "url": "http://localhost:5000/api/tipos/{{ID_TIPO}}" } }
       ]

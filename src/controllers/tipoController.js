@@ -18,6 +18,16 @@ exports.getTipos = async (req, res) => {
   }
 };
 
+exports.getTipoById = async (req, res) => {
+  try {
+    const tipo = await Tipo.findById(req.params.id);
+    if (!tipo) return res.status(404).json({ message: 'Tipo no encontrado' });
+    res.json(tipo);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 exports.updateTipo = async (req, res) => {
   try {
     const { id } = req.params;

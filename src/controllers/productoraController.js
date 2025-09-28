@@ -27,7 +27,7 @@ exports.getProductoraById = async (req, res) => {
     res.json(productora);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ msg: "Error en el servidor" });
+    res.status(500).json({ message: error.message });
   }
 };
 
