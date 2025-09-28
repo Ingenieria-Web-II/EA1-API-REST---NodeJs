@@ -1,8 +1,8 @@
 {
   "info": {
     "name": "Peliculas API - NodeJs",
-    "_postman_id": "f4a8b1c1-1234-4567-8901-abcdef123456",
-    "description": "Colección para probar la API REST de Películas con NodeJs, Express y MongoDB Atlas.",
+    "_postman_id": "a1b2c3d4-e5f6-7890-1234-56789abcdef0",
+    "description": "Colección CRUD completa para probar la API REST de Películas con NodeJs, Express y MongoDB Atlas.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -10,7 +10,7 @@
       "name": "Generos",
       "item": [
         {
-          "name": "Crear Género",
+          "name": "Crear Género (POST)",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -19,14 +19,32 @@
               "raw": "{\n  \"nombre\": \"Acción\",\n  \"descripcion\": \"Películas de acción\"\n}"
             },
             "url": { "raw": "http://localhost:5000/api/generos", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "generos"] }
+          },
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["let data = pm.response.json();", "if (data._id) pm.collectionVariables.set('ID_GENERO', data._id);"] }
+          }]
+        },
+        {
+          "name": "Listar Géneros (GET)",
+          "request": { "method": "GET", "url": "http://localhost:5000/api/generos" }
+        },
+        {
+          "name": "Obtener Género por ID (GET)",
+          "request": { "method": "GET", "url": "http://localhost:5000/api/generos/{{ID_GENERO}}" }
+        },
+        {
+          "name": "Actualizar Género (PUT)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"descripcion\": \"Películas de acción actualizadas\"\n}" },
+            "url": "http://localhost:5000/api/generos/{{ID_GENERO}}"
           }
         },
         {
-          "name": "Listar Géneros",
-          "request": {
-            "method": "GET",
-            "url": { "raw": "http://localhost:5000/api/generos", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "generos"] }
-          }
+          "name": "Eliminar/Desactivar Género (DELETE)",
+          "request": { "method": "DELETE", "url": "http://localhost:5000/api/generos/{{ID_GENERO}}" }
         }
       ]
     },
@@ -34,79 +52,71 @@
       "name": "Directores",
       "item": [
         {
-          "name": "Crear Director",
+          "name": "Crear Director (POST)",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombres\": \"Christopher Nolan\"\n}"
-            },
-            "url": { "raw": "http://localhost:5000/api/directores", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "directores"] }
-          }
+            "body": { "mode": "raw", "raw": "{\n  \"nombres\": \"Christopher Nolan\"\n}" },
+            "url": "http://localhost:5000/api/directores"
+          },
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["let data = pm.response.json();", "if (data._id) pm.collectionVariables.set('ID_DIRECTOR', data._id);"] }
+          }]
         },
-        {
-          "name": "Listar Directores",
-          "request": {
-            "method": "GET",
-            "url": { "raw": "http://localhost:5000/api/directores", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "directores"] }
-          }
-        }
+        { "name": "Listar Directores (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/directores" } },
+        { "name": "Obtener Director por ID (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/directores/{{ID_DIRECTOR}}" } },
+        { "name": "Actualizar Director (PUT)", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"nombres\": \"Christopher Nolan Updated\"\n}" }, "url": "http://localhost:5000/api/directores/{{ID_DIRECTOR}}" } },
+        { "name": "Eliminar/Desactivar Director (DELETE)", "request": { "method": "DELETE", "url": "http://localhost:5000/api/directores/{{ID_DIRECTOR}}" } }
       ]
     },
     {
       "name": "Productoras",
       "item": [
         {
-          "name": "Crear Productora",
+          "name": "Crear Productora (POST)",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Warner Bros\",\n  \"slogan\": \"Entertainment\",\n  \"descripcion\": \"Productora estadounidense\"\n}"
-            },
-            "url": { "raw": "http://localhost:5000/api/productoras", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "productoras"] }
-          }
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Warner Bros\",\n  \"slogan\": \"Entertainment\",\n  \"descripcion\": \"Productora de cine\"\n}" },
+            "url": "http://localhost:5000/api/productoras"
+          },
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["let data = pm.response.json();", "if (data._id) pm.collectionVariables.set('ID_PRODUCTORA', data._id);"] }
+          }]
         },
-        {
-          "name": "Listar Productoras",
-          "request": {
-            "method": "GET",
-            "url": { "raw": "http://localhost:5000/api/productoras", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "productoras"] }
-          }
-        }
+        { "name": "Listar Productoras (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/productoras" } },
+        { "name": "Actualizar Productora (PUT)", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"descripcion\": \"Productora con más de 100 años\"\n}" }, "url": "http://localhost:5000/api/productoras/{{ID_PRODUCTORA}}" } },
+        { "name": "Eliminar/Desactivar Productora (DELETE)", "request": { "method": "DELETE", "url": "http://localhost:5000/api/productoras/{{ID_PRODUCTORA}}" } }
       ]
     },
     {
       "name": "Tipos",
       "item": [
         {
-          "name": "Crear Tipo",
+          "name": "Crear Tipo (POST)",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"nombre\": \"Película\",\n  \"descripcion\": \"Largometraje\"\n}"
-            },
-            "url": { "raw": "http://localhost:5000/api/tipos", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "tipos"] }
-          }
+            "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Película\",\n  \"descripcion\": \"Largometraje\"\n}" },
+            "url": "http://localhost:5000/api/tipos"
+          },
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["let data = pm.response.json();", "if (data._id) pm.collectionVariables.set('ID_TIPO', data._id);"] }
+          }]
         },
-        {
-          "name": "Listar Tipos",
-          "request": {
-            "method": "GET",
-            "url": { "raw": "http://localhost:5000/api/tipos", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "tipos"] }
-          }
-        }
+        { "name": "Listar Tipos (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/tipos" } },
+        { "name": "Actualizar Tipo (PUT)", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"descripcion\": \"Película de larga duración\"\n}" }, "url": "http://localhost:5000/api/tipos/{{ID_TIPO}}" } },
+        { "name": "Eliminar Tipo (DELETE)", "request": { "method": "DELETE", "url": "http://localhost:5000/api/tipos/{{ID_TIPO}}" } }
       ]
     },
     {
       "name": "Media",
       "item": [
         {
-          "name": "Crear Media",
+          "name": "Crear Media (POST)",
           "request": {
             "method": "POST",
             "header": [{ "key": "Content-Type", "value": "application/json" }],
@@ -114,16 +124,17 @@
               "mode": "raw",
               "raw": "{\n  \"serial\": \"SER-0001\",\n  \"titulo\": \"Inception\",\n  \"sinopsis\": \"Un ladrón roba secretos a través de los sueños\",\n  \"url\": \"https://miweb.edu/movies/inception\",\n  \"imagen\": \"https://miweb.edu/img/inception.jpg\",\n  \"anioEstreno\": 2010,\n  \"genero\": \"{{ID_GENERO}}\",\n  \"director\": \"{{ID_DIRECTOR}}\",\n  \"productora\": \"{{ID_PRODUCTORA}}\",\n  \"tipo\": \"{{ID_TIPO}}\"\n}"
             },
-            "url": { "raw": "http://localhost:5000/api/media", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "media"] }
-          }
+            "url": "http://localhost:5000/api/media"
+          },
+          "event": [{
+            "listen": "test",
+            "script": { "exec": ["let data = pm.response.json();", "if (data._id) pm.collectionVariables.set('ID_MEDIA', data._id);"] }
+          }]
         },
-        {
-          "name": "Listar Media",
-          "request": {
-            "method": "GET",
-            "url": { "raw": "http://localhost:5000/api/media", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "media"] }
-          }
-        }
+        { "name": "Listar Media (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/media" } },
+        { "name": "Obtener Media por ID (GET)", "request": { "method": "GET", "url": "http://localhost:5000/api/media/{{ID_MEDIA}}" } },
+        { "name": "Actualizar Media (PUT)", "request": { "method": "PUT", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"sinopsis\": \"Película de ciencia ficción con sueños dentro de sueños\"\n}" }, "url": "http://localhost:5000/api/media/{{ID_MEDIA}}" } },
+        { "name": "Eliminar Media (DELETE)", "request": { "method": "DELETE", "url": "http://localhost:5000/api/media/{{ID_MEDIA}}" } }
       ]
     }
   ],
@@ -131,6 +142,7 @@
     { "key": "ID_GENERO", "value": "" },
     { "key": "ID_DIRECTOR", "value": "" },
     { "key": "ID_PRODUCTORA", "value": "" },
-    { "key": "ID_TIPO", "value": "" }
+    { "key": "ID_TIPO", "value": "" },
+    { "key": "ID_MEDIA", "value": "" }
   ]
 }
