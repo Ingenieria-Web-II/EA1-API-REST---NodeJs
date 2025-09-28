@@ -4,6 +4,7 @@ const controller = require('../controllers/productoraController');
 
 router.post('/', controller.createProductora);
 router.get('/', controller.getProductoras);
+router.get('/:id', controller.getProductoraById);
 router.put('/:id', controller.updateProductora);
 router.delete('/:id', controller.deleteProductora);
 

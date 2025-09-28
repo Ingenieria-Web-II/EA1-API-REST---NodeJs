@@ -18,6 +18,19 @@ exports.getProductoras = async (req, res) => {
   }
 };
 
+exports.getProductoraById = async (req, res) => {
+  try {
+    const productora = await Productora.findById(req.params.id);
+    if (!productora) {
+      return res.status(404).json({ msg: "Productora no encontrada" });
+    }
+    res.json(productora);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Error en el servidor" });
+  }
+};
+
 exports.updateProductora = async (req, res) => {
   try {
     const { id } = req.params;
