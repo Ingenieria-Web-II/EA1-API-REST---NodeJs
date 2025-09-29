@@ -8,6 +8,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get('/', (_, res) => res.send('🚀 API corriendo'));
+app.get('/health', (_, res) => res.json({ ok: true, at: new Date() }));
+
 // Conectar DB
 connectDB();
 
