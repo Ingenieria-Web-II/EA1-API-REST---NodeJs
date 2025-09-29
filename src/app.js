@@ -4,7 +4,7 @@ const connectDB = require('./config/db');
 
 const app = express();
 app.use(cors({
-  origin: 'https://ratingpelis.vercel.app/'
+  origin: 'https://ratingpelis.vercel.app'
 }));
 app.use(express.json());
 
